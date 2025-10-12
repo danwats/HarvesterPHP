@@ -19,7 +19,7 @@ class DNS {
         $this->showProgress = $showProgress;
     }
 
-    public function run() {
+    public function harvest() {
         $recordCount = $this->recordList->countTypes();
         $this->getRecords($recordCount);
     }
@@ -27,7 +27,6 @@ class DNS {
     private function getRecords(int $recordCount) {
         $records = $this->recordList;
         $domain = $this->domain;
-
 
         $tasks = [];
         foreach($records as $recordList) {

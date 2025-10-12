@@ -19,7 +19,7 @@ class RecordList {
         return $v;
     }
 
-    public function doRecords() {
+    public function loadDefaults() {
         $this->add(new Record('@', [RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX, RecordType::NS, RecordType::SOA]));
         $this->add(new Record('www', [RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX]));
         $this->add(new Record('ns1', [RecordType::A, RecordType::AAAA, RecordType::CNAME]));
