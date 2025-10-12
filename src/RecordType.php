@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace DNS\Harvester;
 
-enum RecordType: string {
+enum RecordType: string
+{
     case A = 'a';
     case AAAA = 'aaaa';
     case CNAME = 'cname';
@@ -14,11 +15,13 @@ enum RecordType: string {
     case SOA = 'soa';
     case SRV = 'srv';
 
-    public function toLetter(): string {
+    public function toLetter(): string
+    {
         return $this->value;
     }
 
-    public function toDNS(): int {
+    public function toDNS(): int
+    {
         return match($this->value) {
             'a' => DNS_A,
             'soa' => DNS_SOA,

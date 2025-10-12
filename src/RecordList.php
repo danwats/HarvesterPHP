@@ -1,17 +1,21 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
 namespace DNS\Harvester;
 
-class RecordList {
+class RecordList
+{
     public array $records = [];
 
-    public function add(Record $record): void {
+    public function add(Record $record)
+    {
         $this->records[] = $record;
     }
 
-    public function countTypes(): int {
+    public function countTypes(): int
+    {
         $v = 0;
         foreach ($this->records as $list) {
             $v += count($list->getValues());
@@ -19,7 +23,8 @@ class RecordList {
         return $v;
     }
 
-    public function loadDefaults() {
+    public function loadDefaults()
+    {
         $this->add(new Record('@', [RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX, RecordType::NS, RecordType::SOA]));
         $this->add(new Record('www', [RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX]));
         $this->add(new Record('ns1', [RecordType::A, RecordType::AAAA, RecordType::CNAME]));
