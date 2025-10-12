@@ -1,0 +1,24 @@
+{
+    "name": "danwats/dns_harvester",
+    "description": "DNS harvester to gather DNS records",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dan Watson"
+        }
+    ],
+    "keywords": [
+        "dns",
+        "harvester",
+        "scanner",
+        "recon"
+    ],
+    "autoload": {
+        "psr-4": {
+            "DNS\\Harvester\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/console": "^7.3"
+    }
+}
