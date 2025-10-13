@@ -39,8 +39,8 @@ class DNS
     private string $domain;
     private RecordList $recordList;
     private bool $showProgress;
-    public array $results = [];
     private DnsResolverInterface $resolver;
+    public array $results = [];
 
     public function __construct(string $domain, RecordList $records, bool $showProgress = false)
     {
