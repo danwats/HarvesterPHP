@@ -15,9 +15,9 @@ enum RecordType: string
     case SOA = 'soa';
     case SRV = 'srv';
 
-    public function toLetter(): string
+    public function toLetter(bool $caps = false): string
     {
-        return $this->value;
+        return $caps ? strtoupper($this->value) : $this->value;
     }
 
     public function toDNS(): int

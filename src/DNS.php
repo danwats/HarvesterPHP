@@ -4,8 +4,35 @@ declare(strict_types=1);
 
 namespace DNS\Harvester;
 
+use InvalidArgumentException;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutput;
+
+class RealDnsResolver implements DnsResolverInterface
+{
+    public function lookup(string $hostname, int $type): array|false
+    {
+        return dns_get_record($hostname, $type);
+    }
+
+    public function lookupWithRetry(string $hostname, int $recordType, int $maxAttempts = 5): array|false
+    {
+        for ($attempt = 1; $attempt <= $maxAttempts; $attempt++) {
+            $result = $this->lookup($hostname, $recordType);
+            if ($result !== false) {
+                return $result;
+            }
+            if ($attempt < $maxAttempts) {
+                usleep(500000);
+            }
+        }
+
+        // something wrong with the record
+        // or dns resolver is blocking us
+        echo("cannot get hostname {$hostname} with {$recordType}" . PHP_EOL);
+        return false;
+    }
+}
 
 class DNS
 {
@@ -13,12 +40,14 @@ class DNS
     private RecordList $recordList;
     private bool $showProgress;
     public array $results = [];
+    private DnsResolverInterface $resolver;
 
     public function __construct(string $domain, RecordList $records, bool $showProgress = false)
     {
         $this->domain = $domain;
         $this->recordList = $records;
         $this->showProgress = $showProgress;
+        $this->resolver = new RealDnsResolver();
     }
 
     public function harvest()
@@ -27,7 +56,12 @@ class DNS
         $this->getRecords($recordCount);
     }
 
-    private function getRecords(int $recordCount)
+    public function setDNSResolver(DnsResolverInterface $resolver)
+    {
+        $this->resolver = $resolver;
+    }
+
+    public function getRecords(int $recordCount)
     {
         $records = $this->recordList;
         $domain = $this->domain;
@@ -50,10 +84,11 @@ class DNS
             $progressBar = new ProgressBar($output, $recordCount);
         }
         foreach ($tasks as $task) {
-            $result = dns_get_record($task['hostname'], $task['recordType']->toDNS());
+            $result = $this->resolver->lookupWithRetry($task['hostname'], $task['recordType']->toDNS(), 5);
             foreach ($result as $records) {
                 if (str_contains($records['host'], $this->domain)) {
-                    $this->results[$task['recordType']->toLetter()][$task['hostname']] = $result;
+                    $letter = $task['recordType']->toLetter();
+                    $this->results[$letter][] = $records;
                 }
             }
             if ($this->showProgress) {
