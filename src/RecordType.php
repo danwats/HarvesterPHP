@@ -20,6 +20,12 @@ enum RecordType: string
         return $caps ? strtoupper($this->value) : $this->value;
     }
 
+    public static function fromString(string $value): self
+    {
+        return self::from(strtolower($value));
+    }
+
+
     public function toDNS(): int
     {
         return match($this->value) {
@@ -31,7 +37,7 @@ enum RecordType: string
             'mx' => DNS_MX,
             'ns' => DNS_NS,
             'srv' => DNS_SRV,
-            default => throw new ValueError("Invalid record type: $this->value")
+            default => throw new \ValueError("Invalid record type: $this->value")
         };
     }
 }
