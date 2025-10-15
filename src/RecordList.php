@@ -1,6 +1,5 @@
 <?php
 
-
 declare(strict_types=1);
 
 namespace DNS\Harvester;
@@ -23,7 +22,7 @@ class RecordList
         return $v;
     }
 
-    public function loadDefaults()
+    public function loadDefaults(): array
     {
         $this->add(new Record('@', [RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX, RecordType::NS, RecordType::SOA]));
         $this->add(new Record('www', [RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX]));
@@ -147,5 +146,4 @@ class RecordList
         $this->add(new Record('prod', [RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT]));
         return $this->records;
     }
-
 }

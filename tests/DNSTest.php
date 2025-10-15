@@ -108,10 +108,10 @@ class DNSTest extends TestCase
                 $this->assertEquals($expected['type'], $test['test']['record_type']->toLetter(true));
                 $this->assertEquals($expected['ip'], $record['ip']);
             }
-            $this->assertJson($dns->json_pretty());
+            $this->assertJson($dns->json(JSON_PRETTY_PRINT));
             $this->assertJson($dns->json());
             if (!empty($test['json'])) {
-                $this->assertEquals(json_encode($test['json'], JSON_PRETTY_PRINT), $dns->json_pretty());
+                $this->assertEquals(json_encode($test['json'], JSON_PRETTY_PRINT), $dns->json(JSON_PRETTY_PRINT));
             }
         }
     }
@@ -169,7 +169,7 @@ class DNSTest extends TestCase
                 $this->assertEquals($expected['ttl'], $record['ttl']);
                 $this->assertEquals($expected['target'], $record['target']);
             }
-            $this->assertJson($dns->json_pretty());
+            $this->assertJson($dns->json(JSON_PRETTY_PRINT));
             $this->assertJson($dns->json());
             if (!empty($test['json'])) {
                 $this->assertEquals(json_encode($test['json'], JSON_PRETTY_PRINT), $dns->json_pretty());
