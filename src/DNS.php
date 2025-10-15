@@ -153,14 +153,9 @@ class DNS
         }
     }
 
-    public function json(): string
+    public function json(int $args = 0): string
     {
-        return json_encode($this->results);
-    }
-
-    public function json_pretty(): string
-    {
-        return json_encode($this->results, JSON_PRETTY_PRINT);
+        return json_encode($this->results, $args);
     }
 
     public function bind($showTTL = true)
