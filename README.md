@@ -48,3 +48,19 @@ $dns = new DNS("google.com", $recordList, true);
 $dns->harvest();
 echo $dns->json();
 ```
+
+Print to bind format
+``` php
+use DNS\Harvester\RecordList;
+use DNS\Harvester\DNS;
+
+$recordList = new RecordList();
+$recordList->loadDefaults();
+
+$dns = new DNS("google.com", $recordList);
+$dns->harvest();
+// with TTLs
+echo $dns->bind();
+// without TTLs
+echo $dns->bind(false);
+```
