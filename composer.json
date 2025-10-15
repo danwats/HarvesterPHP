@@ -1,5 +1,5 @@
 {
-    "name": "danwats/dns-harvester",
+    "name": "danwats/HarvesterPHP",
     "description": "DNS harvester to gather DNS records",
     "license": "MIT",
     "authors": [
