@@ -1,5 +1,7 @@
 # DNS Harvester
 
+![HarvesterPHP DNS Record Scanner](assets/banner.png)
+
 This package allows you to gather DNS records from apex domains and predefined hostnames that can be manually defined.
 
 ## Usage/Examples
