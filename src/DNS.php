@@ -6,7 +6,9 @@ namespace DNS\Harvester;
 
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use PHPUnit\Framework\Attributes\CodeCoverageIgnore;
 
+#[CodeCoverageIgnore]
 class RealDnsResolver implements DnsResolverInterface
 {
     public function lookup(string $hostname, int $type): array|false
@@ -62,7 +64,6 @@ class DNS
 
     private function checkWildcardDuplicate(array $records, array $wildcard): bool
     {
-
         if (!isset($wildcard[strtolower($records['type'])])) {
             return false;
         }
@@ -80,11 +81,6 @@ class DNS
                             return true;
                         }
                         break;
-                    case RecordType::CNAME:
-                        if ($check['target'] === $records['target']) {
-                            return true;
-                        }
-                        break;
                 }
             }
         }
@@ -93,10 +89,9 @@ class DNS
 
     private function checkWildcard(string $domain): array
     {
-        $wildcard['a'] = $this->resolver->lookup('wildcardcheck999.' . $domain, RecordType::A->toDNS());
-        $wildcard['aaaa'] = $this->resolver->lookup('wildcardcheck999.' . $domain, RecordType::AAAA->toDNS());
-        $wildcard['cname'] = $this->resolver->lookup('wildcardcheck999.' . $domain, RecordType::CNAME->toDNS());
-
+        $wildcard['a'] = $this->resolver->lookupWithRetry('wildcardcheck999.' . $domain, RecordType::A->toDNS(), 2);
+        $wildcard['aaaa'] = $this->resolver->lookupWithRetry('wildcardcheck999.' . $domain, RecordType::AAAA->toDNS(), 2);
+        $wildcard['cname'] = $this->resolver->lookupWithRetry('wildcardcheck999.' . $domain, RecordType::CNAME->toDNS(), 2);
         // add in wildcard records
         foreach ($wildcard as $t => $records) {
             if (empty($records)) {
