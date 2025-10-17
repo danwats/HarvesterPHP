@@ -13,7 +13,7 @@ class Record
     ) {
         foreach ($type as $item) {
             if (!$item instanceof RecordType) {
-                throw new InvalidArgumentException('All items in $type must be RecordType');
+                throw new \TypeError('All items in $type must be RecordType');
             }
         }
     }
