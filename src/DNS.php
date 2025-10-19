@@ -27,10 +27,10 @@ class RealDnsResolver implements DnsResolverInterface
                 usleep(500000);
             }
         }
-
         // something wrong with the record
         // or dns resolver is blocking us
         echo("cannot get hostname {$hostname} with {$recordType}" . PHP_EOL);
+
         return false;
     }
 }
@@ -84,6 +84,7 @@ class DNS
                 }
             }
         }
+
         return false;
     }
 
@@ -102,6 +103,7 @@ class DNS
                 $this->results[$t][] = $record;
             }
         }
+
         return $wildcard;
     }
 
@@ -146,6 +148,11 @@ class DNS
                 $progressBar->advance();
             }
         }
+        // for end of progress
+        if ($this->showProgress) {
+            echo PHP_EOL;
+        }
+
     }
 
     public function json(int $args = 0): string
@@ -216,6 +223,14 @@ class DNS
                     case RecordType::NS:
                         echo("{$records['target']}.");
                         break;
+
+                    case RecordType::SRV:
+                        echo("{$records['pri']} ");
+                        echo("{$records['weight']} ");
+                        echo("{$records['port']} ");
+                        echo("{$records['target']}.");
+                        break;
+
                     default:
                         throw new \ValueError("Missing value type {$records['type']}");
 

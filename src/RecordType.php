@@ -25,7 +25,6 @@ enum RecordType: string
         return self::from(strtolower($value));
     }
 
-
     public function toDNS(): int
     {
         return match($this->value) {
