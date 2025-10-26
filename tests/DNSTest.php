@@ -13,8 +13,8 @@ test('check record list with some defaults', function() {
 
     expect($recordList->records[0]->getName())->toEqual('@');
     expect($recordList->records[1]->getName())->toEqual('www');
-    expect($recordList->records[0]->getValues())->toEqual([RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX, RecordType::NS, RecordType::SOA]);
-    expect($recordList->records[1]->getValues())->toEqual([RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX]);
+    expect($recordList->records[0]->getValues())->toEqual([RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX, RecordType::NS, RecordType::SOA, RecordType::CAA]);
+    expect($recordList->records[1]->getValues())->toEqual([RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX, RecordType::CAA]);
 });
 
 test('check recordtype a record to letter uppercase with success', function() {
