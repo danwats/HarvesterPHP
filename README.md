@@ -67,7 +67,7 @@ $dns->harvest();
 echo $dns->json();
 ```
 
-Print to bind format
+### print to bind format
 ``` php
 use DNS\Harvester\RecordList;
 use DNS\Harvester\DNS;
