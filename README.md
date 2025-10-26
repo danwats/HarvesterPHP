@@ -4,7 +4,21 @@
 
 This package allows you to gather DNS records from apex domains and predefined hostnames that can be manually defined.
 
-## Usage/Examples
+- [**Installation**](#installation)
+- [**Usage**](#usage)
+    - [pretty-json](#pretty-json)
+    - [with progress](#with-progress)
+    - [define own records to scan](#define-own-records-to-scan)
+
+## Installation
+
+Install HarvesterPHP in your app with Composer:
+```
+composer require danwats/harvesterphp
+```
+
+## Usage
+### pretty-json
 With predefined hostnames e.g. apex, www, etc. with pretty JSON
 ``` php 
 use DNS\Harvester\RecordList;
@@ -17,9 +31,9 @@ $recordList->loadDefaults();
 $dns = new DNS("google.com", $recordList);
 $dns->harvest();
 echo $dns->json(JSON_PRETTY_PRINT);
-
 ```
 
+### with progress bar
 If you want to show progress:
 ``` php
 use DNS\Harvester\RecordList;
@@ -34,6 +48,7 @@ $dns->harvest();
 echo $dns->json();
 ```
 
+### define own records to scan
 You don't have to use predefined hosts, you can add your own
 ``` php
 use DNS\Harvester\RecordList;
