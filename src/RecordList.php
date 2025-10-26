@@ -24,8 +24,8 @@ class RecordList
 
     public function loadDefaults(): array
     {
-        $this->add(new Record('@', [RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX, RecordType::NS, RecordType::SOA]));
-        $this->add(new Record('www', [RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX]));
+        $this->add(new Record('@', [RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX, RecordType::NS, RecordType::SOA, RecordType::CAA]));
+        $this->add(new Record('www', [RecordType::A, RecordType::AAAA, RecordType::CNAME, RecordType::TXT, RecordType::MX, RecordType::CAA]));
         $this->add(new Record('ns1', [RecordType::A, RecordType::AAAA, RecordType::CNAME]));
         $this->add(new Record('ns2', [RecordType::A, RecordType::AAAA, RecordType::CNAME]));
         $this->add(new Record('ns3', [RecordType::A, RecordType::AAAA, RecordType::CNAME]));

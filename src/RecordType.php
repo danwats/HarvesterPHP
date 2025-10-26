@@ -14,6 +14,7 @@ enum RecordType: string
     case NS = 'ns';
     case SOA = 'soa';
     case SRV = 'srv';
+    case CAA = 'caa';
 
     public function toLetter(bool $caps = false): string
     {
@@ -36,6 +37,7 @@ enum RecordType: string
             'mx' => DNS_MX,
             'ns' => DNS_NS,
             'srv' => DNS_SRV,
+            'caa' => DNS_CAA,
             default => throw new \ValueError("Invalid record type: $this->value")
         };
     }

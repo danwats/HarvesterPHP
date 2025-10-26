@@ -92,7 +92,6 @@ class DNS
     {
         $wildcard['a'] = $this->resolver->lookupWithRetry('wildcardcheck999.' . $domain, RecordType::A->toDNS(), 2);
         $wildcard['aaaa'] = $this->resolver->lookupWithRetry('wildcardcheck999.' . $domain, RecordType::AAAA->toDNS(), 2);
-        $wildcard['cname'] = $this->resolver->lookupWithRetry('wildcardcheck999.' . $domain, RecordType::CNAME->toDNS(), 2);
         // add in wildcard records
         foreach ($wildcard as $t => $records) {
             if (empty($records)) {
@@ -229,6 +228,12 @@ class DNS
                         echo("{$records['weight']} ");
                         echo("{$records['port']} ");
                         echo("{$records['target']}.");
+                        break;
+
+                    case RecordType::CAA:
+                        echo("{$records['flags']} ");
+                        echo("{$records['tag']} ");
+                        echo("{$records['value']} ");
                         break;
 
                     default:
