@@ -82,4 +82,3 @@ echo $dns->bind();
 // without TTLs
 echo $dns->bind(false);
 ```
-
