@@ -9,7 +9,7 @@ This package allows you to gather DNS records from apex domains and predefined h
     - [predefined records with pretty json](#predefined-record-with-pretty-json)
     - [with progress bar](#with-progress-bar)
     - [define own records to scan](#define-own-records-to-scan)
-    - [print to bind format](#print to bind format)
+    - [print to bind format](#print-to-bind-format)
 
 ## Installation
 
