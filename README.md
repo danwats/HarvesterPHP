@@ -6,9 +6,10 @@ This package allows you to gather DNS records from apex domains and predefined h
 
 - [**Installation**](#installation)
 - [**Usage**](#usage)
-    - [pretty-json](#pretty-json)
-    - [with progress](#with-progress)
+    - [predefined records with pretty json](#predefined-record-with-pretty-json)
+    - [with progress bar](#with-progress-bar)
     - [define own records to scan](#define-own-records-to-scan)
+    - [print to bind format](#print to bind format)
 
 ## Installation
 
@@ -18,7 +19,7 @@ composer require danwats/harvesterphp
 ```
 
 ## Usage
-### pretty-json
+### predefined records with pretty json
 With predefined hostnames e.g. apex, www, etc. with pretty JSON
 ``` php 
 use DNS\Harvester\RecordList;
